@@ -1,0 +1,44 @@
+/* Design tokens. One accent colour, light neutral surfaces, dark readable text. */
+:root {
+  color-scheme: light;
+
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #f0f2f5;
+  --border: #dbe0e6;
+  --border-strong: #b5bec9;
+
+  --text: #111827;
+  --text-muted: #566172;
+
+  --accent: #2563eb;
+  --accent-hover: #1d4fd8;
+  --accent-soft: #e8efff;
+
+  --danger: #b42318;
+  --danger-soft: #fdecea;
+  --danger-border: #f4b4ae;
+
+  /* BMI scale bands (flat colours; labels always accompany them). */
+  --cat-under: #5b9cf6;
+  --cat-normal: #34b27b;
+  --cat-over: #f0b429;
+  --cat-obese: #e5594f;
+
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --nav-h: calc(56px + var(--safe-top));
+
+  /* Fixed basic-calculator workspace. */
+  --calc-w: 360px;
+  --calc-h: 520px;
+  --history-w: 300px;
+
+  --ease: 160ms ease;
+}

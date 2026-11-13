@@ -1,0 +1,275 @@
+/*
+ * Basic calculator workspace.
+ * Every box has a fixed width and height (or a fixed height with internal scrolling), so nothing
+ * shifts when keys are pressed, results change, or the history list grows.
+ */
+
+.workspace {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
+  padding: 32px 16px 48px;
+}
+
+.calc {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 16px;
+  width: var(--calc-w);
+  height: var(--calc-h);
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Display ---------- */
+
+.display {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 128px;
+  min-width: 0;
+  padding: 12px 14px;
+  overflow: hidden;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.display__expression,
+.display__result {
+  display: block;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+  scrollbar-width: thin;
+}
+
+.display__expression {
+  height: 30px;
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 30px;
+}
+
+.display__result {
+  height: 58px;
+  color: var(--text-muted); /* preview while typing */
+  font-weight: 600;
+  line-height: 58px;
+}
+
+.display__result.is-final {
+  color: var(--text);
+}
+
+.display__result.is-error {
+  color: var(--danger);
+}
+
+.display__result--xl {
+  font-size: 2.75rem;
+}
+
+.display__result--lg {
+  font-size: 2rem;
+}
+
+.display__result--md {
+  font-size: 1.5rem;
+}
+
+.display__result--sm {
+  font-size: 1.125rem;
+}
+
+.display__result.is-error {
+  font-size: 1.25rem;
+}
+
+/* ---------- Keypad ---------- */
+
+.keypad {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 10px;
+  min-height: 0;
+}
+
+.key {
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 600;
+  touch-action: manipulation;
+  transition:
+    background var(--ease),
+    transform 60ms ease;
+}
+
+.key:hover {
+  background: var(--surface-muted);
+}
+
+.key:active {
+  transform: scale(0.97);
+}
+
+.key--fn {
+  background: var(--surface-muted);
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+}
+
+.key--fn:hover {
+  background: #e4e8ee;
+}
+
+.key--op {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--accent);
+  font-size: 1.5rem;
+}
+
+.key--op:hover {
+  background: #d8e4ff;
+}
+
+.key--eq {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.key--eq:hover {
+  background: var(--accent-hover);
+}
+
+/* ---------- History ---------- */
+
+.history {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  width: var(--history-w);
+  height: var(--calc-h);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.history__header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.history__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.history__empty {
+  padding: 16px;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.history__list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+  margin: 0;
+  padding: 10px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.history__item {
+  flex: none;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.history__expression,
+.history__result {
+  overflow-x: auto;
+  overflow-y: hidden;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  scrollbar-width: thin;
+}
+
+.history__expression {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.history__result {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.history__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+/* ---------- Narrow screens: history moves below the calculator ---------- */
+
+@media (max-width: 740px) {
+  .workspace {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding-top: 20px;
+  }
+
+  .calc,
+  .history {
+    width: min(100%, 400px);
+  }
+
+  .history {
+    height: 280px;
+  }
+}
+
+@media (max-width: 360px) {
+  .calc {
+    padding: 12px;
+  }
+
+  .keypad {
+    gap: 8px;
+  }
+}
