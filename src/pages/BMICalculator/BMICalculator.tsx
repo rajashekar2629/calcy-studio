@@ -147,7 +147,7 @@ export function BMICalculator() {
 
         <div className="form-block">
           <div className="form-block__head">
-            <h2 className="form-block__title">Age and gender (optional)</h2>
+            <h2 className="form-block__title">Age and gender</h2>
           </div>
           <div className="form-grid">
             <InputField
@@ -157,7 +157,7 @@ export function BMICalculator() {
               onChange={(age) => edit({ age })}
               inputMode="numeric"
               suffix="years"
-              placeholder="Optional"
+              placeholder="Ex.: 23"
               maxLength={3}
             />
             <div className="field">
@@ -170,9 +170,6 @@ export function BMICalculator() {
                 wrap
               />
             </div>
-          </div>
-          <p className="field__hint">Age and gender are optional and do not change the BMI calculation.</p>
-        </div>
 
         <div className="form-actions">
           <button type="submit" className="btn btn--primary">
