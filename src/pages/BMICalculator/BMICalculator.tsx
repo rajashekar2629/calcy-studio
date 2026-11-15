@@ -170,6 +170,8 @@ export function BMICalculator() {
                 wrap
               />
             </div>
+          </div>
+        </div>
 
         <div className="form-actions">
           <button type="submit" className="btn btn--primary">
